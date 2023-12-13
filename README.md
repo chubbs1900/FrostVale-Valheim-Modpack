@@ -32,13 +32,14 @@ Please note that while every effort is made to keep the modpack updated, mods ma
 Embark on your enchanted journey in Valheim with **FrostVale_ModPack** and create your own legend!
 # Updates
 
-## Version 1.0.0
-Initial release
+## Version 1.2.3
+- **AzuExtendedPlayerInventory**: Updated to 1.3.7
 
 ---
 
-## Version 1.0.5
-MagicPlugin, OdinShipPlus, StartupAccelerator, CrystalLights, Seasonality
+## Version 1.2.2
+- **Updated Mods**: Seasonality, AzuExtendedPlayerInventory
+- **New Additions**: Added 'VentureValheim-Venture_Floating_Items-0.2.0' and 'SpikeHimself-XPortal-1.2.19'
 
 ---
 
@@ -47,7 +48,12 @@ Seasonality updated
 
 ---
 
-## Version 1.2.2
-- **Updated Mods**: Seasonality, AzuExtendedPlayerInventory
-- **New Additions**: Added 'VentureValheim-Venture_Floating_Items-0.2.0' and 'SpikeHimself-XPortal-1.2.19'
+## Version 1.0.5
+MagicPlugin, OdinShipPlus, StartupAccelerator, CrystalLights, Seasonality
 
+---
+
+## Version 1.0.0
+Initial release
+
+---

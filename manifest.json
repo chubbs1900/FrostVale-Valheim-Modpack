@@ -1,6 +1,6 @@
 {
     "name": "FrostVale_ModPack",
-    "version_number": "1.2.2",
+    "version_number": "1.2.3",
     "website_url": "https://github.com/chubbs1900/FrostVale-Valheim-Modpack",
     "description": "Featuring MagicPlugin for spellcasting, PotionPlus for diverse brews, advanced Farming, creative Jewelcrafting, culinary delights with BoneAppetit, ValheimRAFT for nautical adventures, and the exclusive OdinShipPlus for superior seafaring.",
     "dependencies": [
@@ -39,7 +39,7 @@
         "HS-HS_FancierConsole-0.1.4",
         "BetterUI_ForeverMaintained-BetterUI_ForeverMaintained-2.5.4",
         "blacks7ar-BowPlugin-1.7.3",
-        "Azumatt-AzuExtendedPlayerInventory-1.3.6",
+        "Azumatt-AzuExtendedPlayerInventory-1.3.7",
         "Azumatt-AzuAreaRepair-1.1.3",
         "Azumatt-Build_Camera_Custom_Hammers_Edition-1.2.2",
         "ASharpPen-This_Goes_Here-2.1.1",
