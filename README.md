@@ -1,7 +1,7 @@
 ![FrostVale_ModPack Logo](https://dehaven.info/wp-content/uploads/2023/12/frostvale_modpack-Medium.png)
 
 # FrostVale_ModPack - A Journey into the Magical Realm of Valheim
-
+## NOTICE: This is a version of our modpack that will support the [default_old] version of valheim due to the delay of compatibility between Valheim updates.
 Welcome to **FrostVale_ModPack**, where every step in Valheim turns into an enchanting saga. This modpack is carefully curated to enhance your Valheim experience with a blend of magic, crafting, exploration, and survival in a beautifully harsh, snowy realm.
 
 ## Features
@@ -32,8 +32,21 @@ Please note that while every effort is made to keep the modpack updated, mods ma
 Embark on your enchanted journey in Valheim with **FrostVale_ModPack** and create your own legend!
 # Updates
 
-## Version 1.2.3
-- **AzuExtendedPlayerInventory**: Updated to 1.3.7
+## Version 1.7.5 [default_old] (0.217.31 Compatibility)
+
+#### Added Mods (1):
+- `VentureValheim-No_Seasonal_Restrictions` (Version: 0.1.7)
+
+#### Removed Mods (4):
+- `Azumatt-ResourceUnloadOptimizer` (Version: 1.0.2)
+- `MSchmoecker-LocalizationCache` (Version: 0.2.0)
+- `OdinPlus-BoomStick` (Version: 0.0.14)
+- `Smoothbrain-SmoothSave` (Version: 1.0.5)
+- `ValMedia-OdinOnDemand` (Version: 0.9.941)
+
+#### Updated Mods (2):
+- `JereKuusela-Server_devcommands`: Version changed from 1.66.0 to 1.67.0
+- `ValheimModding-Jotunn`: Version changed from 2.15.0 to 2.15.2
 
 ---
 
