@@ -16,7 +16,9 @@ FrostVale_ModPack is the client dependency pack for the FrostVale dedicated Valh
 1. Install Valheim.
 2. Install r2modman.
 3. Search for `FrostVale_ModPack`.
-4. Install the current release and launch Valheim through r2modman.
+4. Install version `3.0.0` or newer.
+5. Launch Valheim through r2modman, not directly through Steam.
+6. Use Direct Connect for the FrostVale server details provided by the host.
 
 ## Version 3.0.0
 
@@ -28,3 +30,5 @@ FrostVale_ModPack is the client dependency pack for the FrostVale dedicated Valh
 ## Notes
 
 Mods can break after Valheim updates. Back up worlds and profiles before changing modpack versions.
+
+The FrostVale dedicated server is not configured as a public server-browser listing. Ask the host for the current address and password.
