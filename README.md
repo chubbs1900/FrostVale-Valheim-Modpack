@@ -18,14 +18,15 @@ Install this package when joining the current FrostVale server. It mirrors the s
 1. Install Valheim.
 2. Install r2modman.
 3. Search for `FrostVale_ModPack_3`.
-4. Install version `3.0.0` or newer.
+4. Install version `3.0.1` or newer.
 5. Launch Valheim through r2modman, not directly through Steam.
 6. Use Direct Connect for the FrostVale server details provided by the host.
 
 ## Version 3.0.0
 
 - Rebuilt against the current FrostVale dedicated server profile.
-- Updated the dependency list to the 51 pinned packages used by the server.
+- Updated the dependency list to the pinned packages used by the server.
+- Includes `ValheimModding-JsonDotNET` for Discord integration runtime support.
 - Moved config ownership to the server for ServerSync-capable mods.
 - Includes Discord integration dependencies, but Discord webhooks and bot tokens are server-side only.
 - Publishes under a new package identity because the original Thunderstore package can no longer be maintained by the current host.

@@ -1,10 +1,11 @@
 {
   "name": "FrostVale_ModPack_3",
-  "version_number": "3.0.0",
+  "version_number": "3.0.1",
   "website_url": "https://github.com/chubbs1900/FrostVale-Valheim-Modpack",
   "description": "New FrostVale 3 client dependency pack for the dedicated Valheim server. Install these pinned dependencies to join.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2333",
+    "ValheimModding-JsonDotNET-13.0.4",
     "OdinPlus-PotionPlus-4.3.0",
     "OdinPlus-OdinsFoodBarrels-1.2.3",
     "Balrond-balrond_runerails-1.0.6",
