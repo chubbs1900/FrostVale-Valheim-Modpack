@@ -1,3 +1,5 @@
+![FrostVale ModPack 3](assets/Frostvale_Modepack_3.jpg)
+
 # FrostVale ModPack 3
 
 FrostVale ModPack 3 is the new client dependency pack for the FrostVale dedicated Valheim server.
