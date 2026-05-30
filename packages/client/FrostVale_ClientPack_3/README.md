@@ -1,4 +1,4 @@
-![FrostVale ClientPack 3](assets/Frostvale_Modepack_3.jpg)
+![FrostVale ClientPack 3](assets/Frostvale_ClientPack_3.png)
 
 # FrostVale ClientPack 3
 
