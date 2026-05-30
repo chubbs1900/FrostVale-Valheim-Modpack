@@ -2,7 +2,7 @@
   "name": "FrostVale_ModPack_3",
   "version_number": "3.1.0",
   "website_url": "https://github.com/chubbs1900/FrostVale-Valheim-Modpack",
-  "description": "FrostVale ModPack 3 - Balrond-first hard-survival Valheim pack. Single canonical pack for solo play and for joining the Eldradia dedicated server: Balrond progression/world/ships/monsters/gear, RtDOcean ocean danger + rice, TheFisher/Spearfishing/Dive In, Smoothbrain skills, ValheimRAFT, OdinPlus consumables, SearsCatalog, Azumatt/MSchmoecker QoL, BetterUI, CookieMilk books/mail, and the FrostValeCompat support plugin. Everyone runs the same pack so Jotunn mod-compatibility never blocks joins.",
+  "description": "Balrond-first hard-survival Valheim pack. One pack for solo and for joining Eldradia: Balrond progression, RtDOcean, fishing, Smoothbrain skills, ValheimRAFT, OdinPlus, SearsCatalog, Azumatt/MSchmoecker QoL, BetterUI, and FrostValeCompat.",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2333",
     "ValheimModding-JsonDotNET-13.0.4",
