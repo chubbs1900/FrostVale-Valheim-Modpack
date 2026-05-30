@@ -1,38 +1,74 @@
-![FrostVale ModPack 3](assets/Frostvale_Modepack_3.jpg)
+# FrostVale Valheim Modpacks
 
-# FrostVale ModPack 3
+FrostVale is a Balrond-first, quality-of-life heavy, conversion-lite Valheim
+modpack family. The goal is to keep the game feeling like Valheim while adding
+new mechanics, better long-term progression, richer oceans, stronger building
+tools, and smoother server administration.
 
-FrostVale ModPack 3 is the new client dependency pack for the FrostVale dedicated Valheim server.
+All FrostVale packages share the same identity:
 
-Install this package when joining the current FrostVale server. It mirrors the server's tested r2modman profile with exact pinned dependency versions.
+- Balrond is the backbone for nature, crafting, food, building, ships,
+  monsters, gear, and world flavor.
+- RtDOcean is used narrowly to bring oceans and shoreline play to life.
+- Azumatt, MSchmoecker, Smoothbrain, SearsCatalog, BetterUI, and related mods
+  provide quality-of-life, skills, UI, storage, crafting, and building support.
+- FrostVale local tweaks may be added over time to clean up world generation
+  and content interactions as the pack is played.
 
-## Server Rules
+## Which Pack Should I Install?
 
-- Portals are disabled on the server.
-- Maps are enabled.
-- The server owns gameplay and ServerSync-capable mod configs.
-- Clients should install the modpack dependencies; server secrets and server-only config are not distributed here.
+| If you are... | Install this | Package folder |
+| --- | --- | --- |
+| Playing solo or single-player | `FrostVale_ModPack_3` | `packages/solo/FrostVale_ModPack_3` |
+| Joining a FrostVale hosted multiplayer server | `FrostVale_ClientPack_3` | `packages/client/FrostVale_ClientPack_3` |
+| Hosting a FrostVale multiplayer server | `FrostVale_ServerPack_3` | `packages/server/FrostVale_ServerPack_3` |
 
-## Installation
+## Package Roles
 
-1. Install Valheim.
-2. Install r2modman.
-3. Search for `FrostVale_ModPack_3`.
-4. Install version `3.0.1` or newer.
-5. Launch Valheim through r2modman, not directly through Steam.
-6. Use Direct Connect for the FrostVale server details provided by the host.
+### FrostVale_ModPack_3
 
-## Version 3.0.0
+The solo package is for single-player. It keeps the FrostVale gameplay, QoL,
+UI, Balrond, RtDOcean, and local compatibility tweaks, but omits Discord server
+operations, VOIP, and multiplayer networking helpers that are only useful for a
+hosted server setup.
 
-- Rebuilt against the current FrostVale dedicated server profile.
-- Updated the dependency list to the pinned packages used by the server.
-- Includes `ValheimModding-JsonDotNET` for Discord integration runtime support.
-- Moved config ownership to the server for ServerSync-capable mods.
-- Includes Discord integration dependencies, but Discord webhooks and bot tokens are server-side only.
-- Publishes under a new package identity because the original Thunderstore package can no longer be maintained by the current host.
+### FrostVale_ClientPack_3
 
-## Notes
+The client package is for players joining a FrostVale hosted server. It keeps
+the gameplay, UI, QoL, VOIP, and networking helpers needed to join and play,
+while leaving Discord operations and secrets on the server side.
 
-Mods can break after Valheim updates. Back up worlds and profiles before changing modpack versions.
+### FrostVale_ServerPack_3
 
-The FrostVale dedicated server is not configured as a public server-browser listing. Ask the host for the current address and password.
+The server package is for dedicated-server hosts. It includes server operations,
+Discord integration, networking/performance helpers, config-sync/enforcement
+mods, and the FrostVale compatibility plugin. Discord credentials, passwords,
+world saves, and generated live configs are not bundled.
+
+## Repository Layout
+
+- `packages/solo/FrostVale_ModPack_3`: Thunderstore source for solo play.
+- `packages/client/FrostVale_ClientPack_3`: Thunderstore source for players.
+- `packages/server/FrostVale_ServerPack_3`: Thunderstore source for hosts.
+- `dependencies`: source dependency lists used to generate package manifests.
+- `docs`: shared architecture, tuning, and setup notes.
+- `scripts/Build-Packages.ps1`: rebuilds manifests and local upload zips.
+
+Generated upload zips are written to `dist/` and are intentionally not tracked
+by git.
+
+## Build Upload Zips
+
+Run from the repo root:
+
+```powershell
+.\scripts\Build-Packages.ps1
+```
+
+The script regenerates `manifest.json` for each package and writes Thunderstore
+upload zips to `dist/`.
+
+## Shared Docs
+
+- `docs/PACK_ARCHITECTURE.md`
+- `docs/DISCORD_SETUP.md`
