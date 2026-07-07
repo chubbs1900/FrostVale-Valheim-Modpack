@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FrostVale Mod Map</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #edf8ff;
+      --muted: #abc5d2;
+      --frost: #96e4ff;
+      --frost-strong: #d7f7ff;
+      --deep: #07111a;
+      --pine: #0b1f24;
+      --wood: #7a5330;
+      --wood-light: #ba8550;
+      --iron: #607483;
+      --ember: #ffb45f;
+      --ember-strong: #ffd39b;
+      --panel: rgba(8, 21, 31, 0.82);
+      --panel-solid: #0c1c27;
+      --line: rgba(157, 230, 255, 0.32);
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.48);
+      --radius: 8px;
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      background: var(--deep);
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 15% 8%, rgba(150, 228, 255, 0.18), transparent 28rem),
+        radial-gradient(circle at 92% 14%, rgba(255, 180, 95, 0.16), transparent 24rem),
+        linear-gradient(180deg, rgba(8, 23, 34, 0.82), rgba(4, 10, 15, 0.96)),
+        url("../assets/Frostvale_Modepack_3.jpg") center top / cover fixed;
+      line-height: 1.5;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, transparent, black 18%, black 84%, transparent);
+      opacity: 0.4;
+    }
+
+    a {
+      color: var(--frost-strong);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .page {
+      width: min(1180px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .hero {
+      min-height: 430px;
+      display: grid;
+      align-items: end;
+      border: 1px solid rgba(215, 247, 255, 0.22);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(4, 12, 18, 0.94), rgba(4, 12, 18, 0.62) 52%, rgba(4, 12, 18, 0.18)),
+        url("../assets/Frostvale_Modepack_3.jpg") center / cover;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-content {
+      max-width: 760px;
+      padding: clamp(24px, 5vw, 54px);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--ember-strong);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 8vw, 5.8rem);
+      line-height: 0.92;
+      letter-spacing: 0;
+      text-shadow: 0 4px 28px rgba(0, 0, 0, 0.7);
+    }
+
+    .subtitle {
+      max-width: 670px;
+      margin: 18px 0 0;
+      color: #d8eef7;
+      font-size: clamp(1rem, 2.4vw, 1.25rem);
+      overflow-wrap: anywhere;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      margin: 18px 0;
+      padding: 12px;
+      border: 1px solid rgba(215, 247, 255, 0.18);
+      border-radius: var(--radius);
+      background: rgba(5, 13, 19, 0.9);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+    }
+
+    .search-wrap {
+      position: relative;
+    }
+
+    .search-wrap::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      border: 2px solid var(--frost);
+      border-radius: 50%;
+      transform: translateY(-50%);
+      opacity: 0.78;
+    }
+
+    .search-wrap::after {
+      content: "";
+      position: absolute;
+      left: 26px;
+      top: calc(50% + 7px);
+      width: 8px;
+      height: 2px;
+      background: var(--frost);
+      transform: rotate(44deg);
+      opacity: 0.78;
+    }
+
+    #search {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 14px 10px 44px;
+      color: var(--ink);
+      border: 1px solid rgba(150, 228, 255, 0.28);
+      border-radius: 6px;
+      background: rgba(8, 21, 31, 0.9);
+      outline: none;
+    }
+
+    #search:focus {
+      border-color: rgba(150, 228, 255, 0.82);
+      box-shadow: 0 0 0 3px rgba(150, 228, 255, 0.16);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .action-button {
+      min-height: 44px;
+      padding: 9px 14px;
+      color: var(--ink);
+      border: 1px solid rgba(255, 211, 155, 0.36);
+      border-radius: 6px;
+      background: linear-gradient(180deg, rgba(122, 83, 48, 0.82), rgba(67, 42, 25, 0.9));
+      cursor: pointer;
+    }
+
+    .action-button:hover,
+    .action-button:focus-visible {
+      border-color: var(--ember-strong);
+      box-shadow: 0 0 0 3px rgba(255, 180, 95, 0.18);
+      outline: none;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0 30px;
+    }
+
+    .stat {
+      min-height: 98px;
+      padding: 16px;
+      border: 1px solid rgba(215, 247, 255, 0.18);
+      border-radius: var(--radius);
+      background: rgba(7, 18, 26, 0.86);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.24);
+    }
+
+    .stat-value {
+      display: block;
+      color: var(--frost-strong);
+      font-size: 2rem;
+      font-weight: 850;
+      line-height: 1;
+    }
+
+    .stat-label {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      overflow-wrap: anywhere;
+    }
+
+    .map-shell {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .map-shell::before {
+      content: "";
+      position: absolute;
+      left: 278px;
+      top: 46px;
+      bottom: 46px;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, var(--line), var(--ember), var(--line), transparent);
+    }
+
+    .root-node {
+      position: sticky;
+      top: 92px;
+      padding: 22px;
+      border: 1px solid rgba(215, 247, 255, 0.22);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(10, 31, 41, 0.94), rgba(8, 16, 23, 0.94)),
+        linear-gradient(90deg, rgba(150, 228, 255, 0.16), transparent);
+      box-shadow: var(--shadow);
+    }
+
+    .root-node::after {
+      content: "";
+      position: absolute;
+      right: -30px;
+      top: 50%;
+      width: 30px;
+      height: 2px;
+      background: var(--line);
+    }
+
+    .root-title {
+      margin: 0;
+      font-size: 1.55rem;
+      line-height: 1.1;
+    }
+
+    .root-copy {
+      margin: 12px 0 0;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+
+    .root-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      padding: 5px 8px;
+      color: #ddf7ff;
+      border: 1px solid rgba(150, 228, 255, 0.26);
+      border-radius: 999px;
+      background: rgba(150, 228, 255, 0.08);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .branches {
+      display: grid;
+      gap: 16px;
+    }
+
+    .branch {
+      position: relative;
+      border: 1px solid rgba(215, 247, 255, 0.18);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 0 15px 34px rgba(0, 0, 0, 0.28);
+      overflow: hidden;
+    }
+
+    .branch::before {
+      content: "";
+      position: absolute;
+      left: -28px;
+      top: 34px;
+      width: 28px;
+      height: 2px;
+      background: var(--line);
+    }
+
+    .branch[data-tone="balrond"] {
+      border-color: rgba(255, 211, 155, 0.34);
+    }
+
+    .branch[data-tone="ocean"] {
+      border-color: rgba(150, 228, 255, 0.34);
+    }
+
+    .branch[data-tone="qol"] {
+      border-color: rgba(186, 133, 80, 0.38);
+    }
+
+    .branch-toggle {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      width: 100%;
+      padding: 18px 18px 16px;
+      color: inherit;
+      border: 0;
+      background: linear-gradient(90deg, rgba(150, 228, 255, 0.08), transparent);
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .branch-toggle:focus-visible {
+      outline: 3px solid rgba(150, 228, 255, 0.55);
+      outline-offset: -3px;
+    }
+
+    .branch-title {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      align-items: center;
+      margin: 0;
+      font-size: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .branch-role {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      overflow-wrap: anywhere;
+    }
+
+    .branch-count {
+      align-self: start;
+      min-width: 3.3rem;
+      padding: 6px 9px;
+      color: var(--ember-strong);
+      border: 1px solid rgba(255, 211, 155, 0.32);
+      border-radius: 999px;
+      background: rgba(255, 180, 95, 0.08);
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .chevron {
+      display: inline-grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      color: var(--frost-strong);
+      border: 1px solid rgba(150, 228, 255, 0.32);
+      border-radius: 999px;
+      transition: transform 160ms ease;
+    }
+
+    .branch[aria-expanded="false"] .chevron {
+      transform: rotate(-90deg);
+    }
+
+    .branch-body {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 10px;
+      padding: 0 18px 18px;
+    }
+
+    .branch[aria-expanded="false"] .branch-body {
+      display: none;
+    }
+
+    .mod-card {
+      min-height: 126px;
+      padding: 13px;
+      border: 1px solid rgba(215, 247, 255, 0.13);
+      border-radius: 6px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+        rgba(5, 14, 21, 0.74);
+    }
+
+    .mod-card.is-hidden {
+      display: none;
+    }
+
+    .mod-name {
+      margin: 0;
+      color: #ffffff;
+      font-size: 1rem;
+      line-height: 1.22;
+      overflow-wrap: anywhere;
+    }
+
+    .mod-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: rgba(96, 116, 131, 0.22);
+      color: #c7dce6;
+      font-size: 0.76rem;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .pill.version {
+      color: #07111a;
+      background: var(--frost);
+    }
+
+    .mod-role {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .empty-state {
+      display: none;
+      margin: 24px 0 0;
+      padding: 18px;
+      border: 1px solid rgba(255, 211, 155, 0.35);
+      border-radius: var(--radius);
+      background: rgba(67, 42, 25, 0.72);
+      color: var(--ember-strong);
+      text-align: center;
+    }
+
+    .empty-state.is-visible {
+      display: block;
+    }
+
+    .footer-note {
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
+
+    mark {
+      color: #07111a;
+      background: var(--ember-strong);
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+
+    @media (max-width: 820px) {
+      body {
+        background-attachment: scroll;
+      }
+
+      .page {
+        width: min(680px, calc(100vw - 20px));
+        padding-top: 10px;
+      }
+
+      .hero {
+        min-height: 360px;
+      }
+
+      .toolbar {
+        position: static;
+        grid-template-columns: 1fr;
+      }
+
+      .actions {
+        justify-content: stretch;
+      }
+
+      .action-button {
+        flex: 1 1 140px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .map-shell {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .map-shell::before,
+      .root-node::after,
+      .branch::before {
+        display: none;
+      }
+
+      .root-node {
+        position: relative;
+        top: auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content,
+      .root-node,
+      .branch-toggle,
+      .branch-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .branch-body {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-content">
+        <p class="eyebrow">Balrond-first hard survival</p>
+        <h1 id="page-title">FrostVale Mod Map</h1>
+        <p class="subtitle">A player-facing map of the single FrostVale loadout: the backbone, the ocean trials, the skills, and the camp-life tools that keep the expedition moving.</p>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="Map controls">
+      <div class="search-wrap">
+        <label class="sr-only" for="search">Search mods</label>
+        <input id="search" type="search" placeholder="Search by mod, author, category, or role">
+      </div>
+      <div class="actions">
+        <button class="action-button" type="button" id="expand-all">Expand all</button>
+        <button class="action-button" type="button" id="collapse-all">Collapse all</button>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Pack stats">
+      <div class="stat">
+        <span class="stat-value" id="stat-mods">0</span>
+        <span class="stat-label">Pinned dependencies</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="stat-branches">0</span>
+        <span class="stat-label">Gameplay branches</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">1</span>
+        <span class="stat-label">Shared server/client pack</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value" id="stat-visible">0</span>
+        <span class="stat-label">Visible after search</span>
+      </div>
+    </section>
+
+    <section class="map-shell" aria-label="FrostVale dependency map">
+      <aside class="root-node">
+        <h2 class="root-title">FrostVale_ModPack_3</h2>
+        <p class="root-copy">One pack for solo play and Eldradia multiplayer. Balrond owns the core survival identity; every other branch supports that spine.</p>
+        <div class="root-tags" aria-label="Pack traits">
+          <span class="tag">One modset</span>
+          <span class="tag">Pinned versions</span>
+          <span class="tag">ServerSync tuned</span>
+          <span class="tag">FrostValeCompat</span>
+        </div>
+      </aside>
+      <div class="branches" id="branches"></div>
+    </section>
+
+    <div class="empty-state" id="empty-state">No matching mods on this trail.</div>
+    <p class="footer-note">Generated as a portable presentation page from the current FrostVale dependency structure. The canonical editable list remains the server workspace's mods/dependencies.txt.</p>
+  </main>
+
+  <script>
+    const branches = [
+      {
+        title: "Core Libraries",
+        tone: "core",
+        role: "The loader and shared foundations every other branch stands on.",
+        mods: [
+          ["denikson-BepInExPack_Valheim-5.4.2333", "BepInExPack Valheim", "BepInEx plugin loader for Valheim."],
+          ["ValheimModding-JsonDotNET-13.0.4", "JsonDotNET", "Shared JSON library used by dependent mods."],
+          ["ValheimModding-Jotunn-2.29.0", "Jotunn", "Valheim modding library and networked content gatekeeper."]
+        ]
+      },
+      {
+        title: "Balrond Backbone",
+        tone: "balrond",
+        role: "The main FrostVale identity: progression, world content, construction, ships, monsters, gear, and survival pressure.",
+        mods: [
+          ["Balrond-balrond_runerails-1.0.6", "Balrond Runerails", "Rune-themed rails and infrastructure pieces."],
+          ["Balrond-balrond_constructions-1.4.0", "Balrond Constructions", "Primary building and construction expansion."],
+          ["Balrond-balrond_furniture_reborn-1.2.5", "Balrond Furniture Reborn", "Home, hall, and settlement furnishing pieces."],
+          ["Balrond-balrond_amazing_nature-1.2.7", "Balrond Amazing Nature", "World nature and environmental identity."],
+          ["Balrond-balrond_paintingframe-1.0.0", "Balrond Painting Frame", "Decorative painting and frame content."],
+          ["Balrond-balrond_wind_chasers-1.0.5", "Balrond Wind Chasers", "Wind, exploration, and travel-flavored content."],
+          ["Balrond-balrond_shipyard-1.6.5", "Balrond Shipyard", "Primary crafted ship progression."],
+          ["Balrond-balrond_humanoidRandomizer-1.4.0", "Balrond Humanoid Randomizer", "Variety and pressure for humanoid encounters."],
+          ["Balrond-balrond_MonsterMayehm-0.2.4", "Balrond Monster Mayhem", "Core monster expansion for the hard-survival loop."],
+          ["Balrond-balrond_arsenal_reborn-0.1.6", "Balrond Arsenal Reborn", "Main weapons and gear branch."],
+          ["Balrond-balrond_secondchance-1.0.2", "Balrond Second Chance", "Survival recovery and comeback mechanics."],
+          ["Balrond-balrond_hearth_marks-1.0.2", "Balrond Hearth Marks", "Settlement and hearth-themed utility."]
+        ]
+      },
+      {
+        title: "Smoothbrain Skills / Light Progression",
+        tone: "skills",
+        role: "Player growth, combat rarity, professions, and travel practice without replacing Balrond.",
+        mods: [
+          ["Smoothbrain-Jewelcrafting-2.0.1", "Jewelcrafting", "Socketed progression and gem reward economy."],
+          ["Smoothbrain-CreatureLevelAndLootControl-4.6.4", "Creature Level and Loot Control", "Creature stars and global encounter pressure."],
+          ["Smoothbrain-Farming-2.2.2", "Farming", "Skill progression for cultivation."],
+          ["Smoothbrain-Exploration-1.0.4", "Exploration", "Skill reward for scouting and range."],
+          ["Smoothbrain-Sailing-1.1.8", "Sailing", "Skill support for FrostVale's ocean travel loop."],
+          ["Smoothbrain-Foraging-1.0.10", "Foraging", "Skill progression for gathering wild resources."],
+          ["Smoothbrain-Building-1.2.6", "Building", "Skill progression for construction work."],
+          ["Smoothbrain-DarwinAwards-1.0.6", "Darwin Awards", "Risk and consequence flavor for dangerous play."],
+          ["Smoothbrain-Backpacks-1.3.8", "Backpacks", "Carry support for expedition logistics."],
+          ["Smoothbrain-Ranching-1.1.6", "Ranching", "Skill layer for animals and homestead labor."]
+        ]
+      },
+      {
+        title: "Ocean / Fishing / Water Travel",
+        tone: "ocean",
+        role: "Sea danger, fishing depth, spearfishing, and diving for expedition routes.",
+        mods: [
+          ["Marlthon-TheFisher-0.3.5", "TheFisher", "Fishing content, ocean interest, and aquatic discoveries."],
+          ["Soloredis-RtDOcean-2.2.23", "RtDOcean", "Ocean creature danger and shoreline rice support."],
+          ["Korppis-Spearfishing-1.0.4", "Spearfishing", "Hands-on fish hunting and water interaction."],
+          ["sighsorry-Dive_In-1.0.6", "Dive In", "Diving and swimming behavior owner."]
+        ]
+      },
+      {
+        title: "Potions / Food / Consumables",
+        tone: "food",
+        role: "Preparation tools for longer trips, harder fights, and stocked halls.",
+        mods: [
+          ["OdinPlus-PotionPlus-4.3.0", "PotionPlus", "Expanded potions and consumable planning."],
+          ["OdinPlus-OdinsFoodBarrels-1.2.3", "Odins Food Barrels", "Food storage and settlement utility."]
+        ]
+      },
+      {
+        title: "Ships / Vehicles",
+        tone: "ocean",
+        role: "Large-scale naval building as a special FrostVale feature beside Balrond Shipyard.",
+        mods: [
+          ["zolantris-ValheimRAFTBETA-4.3.0", "ValheimRAFTBETA", "Large custom raft and shipbuilding fantasy."]
+        ]
+      },
+      {
+        title: "Build Menu / Crafting / Storage QoL",
+        tone: "qol",
+        role: "The workshop layer: menus, storage reach, repair, inventory, config access, and repeated camp chores.",
+        mods: [
+          ["ComfyMods-SearsCatalog-1.8.0", "SearsCatalog", "Build menu support for large content packs."],
+          ["Azumatt-AzuMiscPatches-1.2.8", "AzuMiscPatches", "Assorted QoL and behavior polish."],
+          ["Azumatt-AzuAreaRepair-1.1.6", "AzuAreaRepair", "Area repair for settlement upkeep."],
+          ["Azumatt-AzuWorkbenchTweaks-1.0.5", "AzuWorkbenchTweaks", "Workbench and repair tuning."],
+          ["Azumatt-AzuCraftyBoxes-1.8.14", "AzuCraftyBoxes", "Craft and build from nearby containers."],
+          ["Azumatt-AzuExtendedPlayerInventory-2.4.1", "AzuExtendedPlayerInventory", "Inventory expansion for expedition loadouts."],
+          ["Azumatt-AzuAutoStore-3.0.14", "AzuAutoStore", "Automatic sorting into nearby storage."],
+          ["Azumatt-AzuHoverStats-1.1.9", "AzuHoverStats", "Useful stats in hover text."],
+          ["Azumatt-Build_Camera_Custom_Hammers_Edition-1.2.10", "Build Camera Custom Hammers Edition", "Better building placement camera."],
+          ["Azumatt-AAA_Crafting-2.1.6", "AAA Crafting", "Crafting interface and utility improvements."],
+          ["Azumatt-Azus_UnOfficial_ConfigManager-18.4.4", "Azus UnOfficial ConfigManager", "In-game configuration access."],
+          ["Azumatt-SaveCrossbowState-1.0.2", "SaveCrossbowState", "Keeps crossbow state through normal play flow."],
+          ["MSchmoecker-MultiUserChest-0.6.1", "MultiUserChest", "Shared chest access for multiplayer bases."],
+          ["MSchmoecker-ItemHopper-2.0.0", "ItemHopper", "Storage automation and item movement."]
+        ]
+      },
+      {
+        title: "In-game Books / Mail",
+        tone: "books",
+        role: "Lore, messages, and server storytelling tools inside the world.",
+        mods: [
+          ["CookieMilk-ReadMe-1.1.8", "ReadMe", "Books and readable player-facing notes."],
+          ["CookieMilk-YouGotMail-1.1.9", "YouGotMail", "Mail and message delivery."]
+        ]
+      },
+      {
+        title: "UI",
+        tone: "ui",
+        role: "Readable interfaces and movement feedback that support everyday play.",
+        mods: [
+          ["BetterUI_ForeverMaintained-BetterUI_ForeverMaintained-2.5.9", "BetterUI ForeverMaintained", "Client-facing UI clarity and presentation."],
+          ["Nextek-SpeedyPaths-1.0.9", "SpeedyPaths", "Server-synced road, structure, and stamina bonuses."]
+        ]
+      },
+      {
+        title: "Server Operations",
+        tone: "ops",
+        role: "Host-side operations support that ships idle for solo players.",
+        mods: [
+          ["VerdantsAscent-FiresDiscordIntegration-1.0.1", "FiresDiscordIntegration", "Discord operations on the host when a token is configured."]
+        ]
+      }
+    ];
+
+    const branchesEl = document.getElementById("branches");
+    const searchEl = document.getElementById("search");
+    const emptyEl = document.getElementById("empty-state");
+    const statModsEl = document.getElementById("stat-mods");
+    const statBranchesEl = document.getElementById("stat-branches");
+    const statVisibleEl = document.getElementById("stat-visible");
+
+    function parseDependency(full) {
+      const parts = full.split("-");
+      const version = parts.pop();
+      const namespace = parts.shift();
+      return {
+        full,
+        namespace,
+        version
+      };
+    }
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    function highlight(value, query) {
+      if (!query) return escapeHtml(value);
+      const lower = value.toLowerCase();
+      const start = lower.indexOf(query);
+      if (start === -1) return escapeHtml(value);
+      const end = start + query.length;
+      return `${escapeHtml(value.slice(0, start))}<mark>${escapeHtml(value.slice(start, end))}</mark>${escapeHtml(value.slice(end))}`;
+    }
+
+    function render() {
+      branchesEl.innerHTML = branches.map((branch, index) => {
+        const cards = branch.mods.map(mod => {
+          const parsed = parseDependency(mod[0]);
+          const searchText = `${branch.title} ${branch.role} ${mod[0]} ${mod[1]} ${parsed.namespace} ${parsed.version} ${mod[2]}`.toLowerCase();
+          return `
+            <article class="mod-card" data-search="${escapeHtml(searchText)}" data-dependency="${escapeHtml(mod[0])}">
+              <h3 class="mod-name" data-raw="${escapeHtml(mod[1])}">${escapeHtml(mod[1])}</h3>
+              <div class="mod-meta">
+                <span class="pill">${escapeHtml(parsed.namespace)}</span>
+                <span class="pill version">v${escapeHtml(parsed.version)}</span>
+              </div>
+              <p class="mod-role" data-raw="${escapeHtml(mod[2])}">${escapeHtml(mod[2])}</p>
+            </article>`;
+        }).join("");
+
+        return `
+          <section class="branch" data-tone="${escapeHtml(branch.tone)}" aria-expanded="true">
+            <button class="branch-toggle" type="button" aria-expanded="true" aria-controls="branch-${index}">
+              <span>
+                <span class="branch-title">
+                  <span data-raw="${escapeHtml(branch.title)}">${escapeHtml(branch.title)}</span>
+                  <span class="chevron" aria-hidden="true">v</span>
+                </span>
+                <span class="branch-role" data-raw="${escapeHtml(branch.role)}">${escapeHtml(branch.role)}</span>
+              </span>
+              <span class="branch-count">${branch.mods.length}</span>
+            </button>
+            <div class="branch-body" id="branch-${index}">
+              ${cards}
+            </div>
+          </section>`;
+      }).join("");
+
+      document.querySelectorAll(".branch-toggle").forEach(button => {
+        button.addEventListener("click", () => {
+          const branch = button.closest(".branch");
+          const expanded = branch.getAttribute("aria-expanded") !== "false";
+          branch.setAttribute("aria-expanded", String(!expanded));
+          button.setAttribute("aria-expanded", String(!expanded));
+        });
+      });
+
+      statModsEl.textContent = branches.reduce((sum, branch) => sum + branch.mods.length, 0);
+      statBranchesEl.textContent = branches.length;
+      applySearch();
+    }
+
+    function resetHighlights() {
+      document.querySelectorAll("[data-raw]").forEach(el => {
+        el.innerHTML = escapeHtml(el.dataset.raw);
+      });
+    }
+
+    function applyHighlights(query) {
+      document.querySelectorAll("[data-raw]").forEach(el => {
+        el.innerHTML = highlight(el.dataset.raw, query);
+      });
+    }
+
+    function applySearch() {
+      const query = searchEl.value.trim().toLowerCase();
+      let visibleCards = 0;
+      let visibleBranches = 0;
+
+      resetHighlights();
+      if (query) applyHighlights(query);
+
+      document.querySelectorAll(".branch").forEach(branch => {
+        let branchHasMatch = false;
+        branch.querySelectorAll(".mod-card").forEach(card => {
+          const matched = !query || card.dataset.search.includes(query);
+          card.classList.toggle("is-hidden", !matched);
+          if (matched) {
+            visibleCards += 1;
+            branchHasMatch = true;
+          }
+        });
+
+        branch.hidden = !branchHasMatch;
+        if (branchHasMatch) visibleBranches += 1;
+        if (query && branchHasMatch) {
+          branch.setAttribute("aria-expanded", "true");
+          branch.querySelector(".branch-toggle").setAttribute("aria-expanded", "true");
+        }
+      });
+
+      statVisibleEl.textContent = visibleCards;
+      emptyEl.classList.toggle("is-visible", visibleBranches === 0);
+    }
+
+    document.getElementById("expand-all").addEventListener("click", () => {
+      document.querySelectorAll(".branch").forEach(branch => {
+        branch.setAttribute("aria-expanded", "true");
+        branch.querySelector(".branch-toggle").setAttribute("aria-expanded", "true");
+      });
+    });
+
+    document.getElementById("collapse-all").addEventListener("click", () => {
+      document.querySelectorAll(".branch").forEach(branch => {
+        branch.setAttribute("aria-expanded", "false");
+        branch.querySelector(".branch-toggle").setAttribute("aria-expanded", "false");
+      });
+    });
+
+    searchEl.addEventListener("input", applySearch);
+    render();
+  </script>
+</body>
+</html>

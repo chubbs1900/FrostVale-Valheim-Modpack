@@ -41,13 +41,14 @@ this only after the live server has been rebuilt on the current list and tuned.
 ## Local tweaks
 
 `FrostValeCompat.dll` is the local compatibility plugin. It keeps RtDOcean rice
-placement near shoreline water level and supports Discord-visible player-name
-cleanup.
+placement near shoreline water level, supports Discord-visible player-name
+cleanup, and owns FrostVale's star-scaled Jewelcrafting creature gem drops.
 
 ## Building
 
 - Authoritative build (from the server workspace): `scripts/Build-Modpacks.ps1`
-  in `P:\valheim`. Reads `mods/dependencies.txt`, resolves latest versions,
-  re-pins, stages this repo, and zips to `dist/`.
+  in `P:\valheim`. Reads pinned versions from `mods/dependencies.txt`, stages
+  this repo, and zips to `dist/`. Pass `-Update` only after approving a release
+  that should re-pin non-core dependencies to latest Thunderstore versions.
 - Standalone build (from a clone of just this repo): `scripts/Build-Packages.ps1`
   reads `dependencies/frostvale.txt` and zips the current repo contents.

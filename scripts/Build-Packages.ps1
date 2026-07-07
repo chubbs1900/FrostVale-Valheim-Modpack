@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$Version = '3.1.0',
+    [string]$Version = '3.1.4',
     [string]$OutputDirectory = 'dist'
 )
 
@@ -10,7 +10,8 @@ param(
 # icon.png, README, CHANGELOG, LICENSE, plugins/, docs/, assets/).
 #
 # The authoritative builder is P:\valheim\scripts\Build-Modpacks.ps1, which
-# resolves latest versions and regenerates manifest.json + dependencies/frostvale.txt.
+# reads pinned versions by default and regenerates manifest.json +
+# dependencies/frostvale.txt.
 
 $ErrorActionPreference = 'Stop'
 $Root = Split-Path -Parent $PSScriptRoot
