@@ -581,7 +581,7 @@
       <div class="hero-content">
         <p class="eyebrow">Balrond-first hard survival</p>
         <h1 id="page-title">FrostVale Mod Map</h1>
-        <p class="subtitle">A player-facing map of the single FrostVale loadout: the backbone, the ocean trials, the skills, and the camp-life tools that keep the expedition moving.</p>
+        <p class="subtitle">A player-facing map of FrostVale's shared loadout: the backbone, the ocean trials, the skills, and the camp-life tools that keep the expedition moving.</p>
       </div>
     </section>
 
@@ -607,7 +607,7 @@
       </div>
       <div class="stat">
         <span class="stat-value">1</span>
-        <span class="stat-label">Shared server/client pack</span>
+        <span class="stat-label">Shared gameplay pack</span>
       </div>
       <div class="stat">
         <span class="stat-value" id="stat-visible">0</span>
@@ -618,9 +618,9 @@
     <section class="map-shell" aria-label="FrostVale dependency map">
       <aside class="root-node">
         <h2 class="root-title">FrostVale_ModPack_3</h2>
-        <p class="root-copy">One pack for solo play and Eldradia multiplayer. Balrond owns the core survival identity; every other branch supports that spine.</p>
+        <p class="root-copy">One reusable pack for solo play and community servers. Balrond owns the core survival identity; every shared branch supports that spine.</p>
         <div class="root-tags" aria-label="Pack traits">
-          <span class="tag">One modset</span>
+          <span class="tag">One shared modset</span>
           <span class="tag">Pinned versions</span>
           <span class="tag">ServerSync tuned</span>
           <span class="tag">FrostValeCompat</span>
@@ -630,7 +630,7 @@
     </section>
 
     <div class="empty-state" id="empty-state">No matching mods on this trail.</div>
-    <p class="footer-note">Generated as a portable presentation page from the current FrostVale dependency structure. The canonical editable list remains the server workspace's mods/dependencies.txt.</p>
+    <p class="footer-note">Generated from FrostVale's shared dependency structure. Dedicated-server-only utilities such as WebMap are optional overlays and are not installed in player profiles.</p>
   </main>
 
   <script>
@@ -642,7 +642,7 @@
         mods: [
           ["denikson-BepInExPack_Valheim-5.4.2333", "BepInExPack Valheim", "BepInEx plugin loader for Valheim."],
           ["ValheimModding-JsonDotNET-13.0.4", "JsonDotNET", "Shared JSON library used by dependent mods."],
-          ["ValheimModding-Jotunn-2.29.0", "Jotunn", "Valheim modding library and networked content gatekeeper."]
+          ["ValheimModding-Jotunn-2.29.2", "Jotunn", "Valheim modding library and networked content gatekeeper."]
         ]
       },
       {
@@ -650,15 +650,15 @@
         tone: "balrond",
         role: "The main FrostVale identity: progression, world content, construction, ships, monsters, gear, and survival pressure.",
         mods: [
-          ["Balrond-balrond_runerails-1.0.6", "Balrond Runerails", "Rune-themed rails and infrastructure pieces."],
-          ["Balrond-balrond_constructions-1.4.0", "Balrond Constructions", "Primary building and construction expansion."],
-          ["Balrond-balrond_furniture_reborn-1.2.5", "Balrond Furniture Reborn", "Home, hall, and settlement furnishing pieces."],
-          ["Balrond-balrond_amazing_nature-1.2.7", "Balrond Amazing Nature", "World nature and environmental identity."],
+          ["Balrond-balrond_runerails-1.0.8", "Balrond Runerails", "Rune-themed rails and infrastructure pieces."],
+          ["Balrond-balrond_constructions-1.4.1", "Balrond Constructions", "Primary building and construction expansion."],
+          ["Balrond-balrond_furniture_reborn-1.2.6", "Balrond Furniture Reborn", "Home, hall, and settlement furnishing pieces."],
+          ["Balrond-balrond_amazing_nature-1.3.8", "Balrond Amazing Nature", "World nature and environmental identity."],
           ["Balrond-balrond_paintingframe-1.0.0", "Balrond Painting Frame", "Decorative painting and frame content."],
           ["Balrond-balrond_wind_chasers-1.0.5", "Balrond Wind Chasers", "Wind, exploration, and travel-flavored content."],
-          ["Balrond-balrond_shipyard-1.6.5", "Balrond Shipyard", "Primary crafted ship progression."],
+          ["Balrond-balrond_shipyard-1.6.6", "Balrond Shipyard", "Primary crafted ship progression."],
           ["Balrond-balrond_humanoidRandomizer-1.4.0", "Balrond Humanoid Randomizer", "Variety and pressure for humanoid encounters."],
-          ["Balrond-balrond_MonsterMayehm-0.2.4", "Balrond Monster Mayhem", "Core monster expansion for the hard-survival loop."],
+          ["Balrond-balrond_MonsterMayehm-0.3.7", "Balrond Monster Mayhem", "Core monster expansion for the hard-survival loop."],
           ["Balrond-balrond_arsenal_reborn-0.1.6", "Balrond Arsenal Reborn", "Main weapons and gear branch."],
           ["Balrond-balrond_secondchance-1.0.2", "Balrond Second Chance", "Survival recovery and comeback mechanics."],
           ["Balrond-balrond_hearth_marks-1.0.2", "Balrond Hearth Marks", "Settlement and hearth-themed utility."]
@@ -687,9 +687,9 @@
         role: "Sea danger, fishing depth, spearfishing, and diving for expedition routes.",
         mods: [
           ["Marlthon-TheFisher-0.3.5", "TheFisher", "Fishing content, ocean interest, and aquatic discoveries."],
-          ["Soloredis-RtDOcean-2.2.23", "RtDOcean", "Ocean creature danger and shoreline rice support."],
+          ["Soloredis-RtDOcean-2.2.38", "RtDOcean", "Ocean creature danger and shoreline rice support."],
           ["Korppis-Spearfishing-1.0.4", "Spearfishing", "Hands-on fish hunting and water interaction."],
-          ["sighsorry-Dive_In-1.0.6", "Dive In", "Diving and swimming behavior owner."]
+          ["sighsorry-Dive_In-1.1.9", "Dive In", "Diving and swimming behavior owner."]
         ]
       },
       {
@@ -751,7 +751,7 @@
       {
         title: "Server Operations",
         tone: "ops",
-        role: "Host-side operations support that ships idle for solo players.",
+        role: "Operations support included in the shared pack that sits idle until a host configures it.",
         mods: [
           ["VerdantsAscent-FiresDiscordIntegration-1.0.1", "FiresDiscordIntegration", "Discord operations on the host when a token is configured."]
         ]

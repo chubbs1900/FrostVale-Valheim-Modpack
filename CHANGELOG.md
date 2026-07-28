@@ -1,5 +1,39 @@
 # Changelog
 
+## 3.1.7 - Client join fix and server-only WebMap guide
+
+- Removed `Zevaryx-WebMap-2.7.1` from the shared Thunderstore dependency set,
+  reducing the public pack from 52 to 51 dependencies.
+- Fixed a client join blocker in which WebMap's dedicated-server
+  `ZNet.SetServer` patch threw a `NullReferenceException` from the server
+  browser.
+- Kept all gameplay and networked mod versions unchanged from 3.1.6.
+- Added a generic WebMap deployment guide for administrators who choose to run
+  it as an optional dedicated-server-only utility.
+- Excluded WebMap's server URL and config from client packages and profile
+  exports.
+- Existing profiles should disable or uninstall an orphaned WebMap entry after
+  updating; a clean 3.1.7 profile is the safest migration.
+
+## 3.1.6 - Public deployment guide
+
+- Repackaged the same tested 52-mod dependency set as 3.1.5; no mod versions or
+  gameplay settings changed.
+- Expanded the public deployment guide for solo players, dedicated-server
+  hosts, profile-code sharing, updates, forks, and rollback.
+- Refreshed the mod map and ecosystem notes to match the current mainline.
+- Documented Thunderstore's immutable package-version rule and the required
+  patch-version bump after a version has already been uploaded.
+
+## 3.1.5 - Balrond ocean maintenance
+
+- Updated Jotunn from 2.29.1 to 2.29.2.
+- Updated Balrond Amazing Nature from 1.3.6 to 1.3.8 and Monster Mayhem from
+  0.3.4 to 0.3.7.
+- Updated RtDOcean from 2.2.35 to 2.2.38 and Dive In from 1.1.4 to 1.1.9.
+- Rebuilt the single shared server/client pack so the server and players stay
+  on one identical FrostVale modset.
+
 ## 3.1.4 - Balrond ocean polish
 
 - Updated Balrond Amazing Nature from 1.3.1 to 1.3.6, Shipyard from 1.6.5
