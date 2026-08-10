@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.1.8 - Ocean, inventory, and UI maintenance
+
+- Updated `Soloredis-RtDOcean` from 2.2.38 to 2.2.39 and `sighsorry-Dive_In`
+  from 1.1.9 to 1.2.0.
+- Updated `OdinPlus-PotionPlus` from 4.3.0 to 4.3.1.
+- Updated `Azumatt-AzuCraftyBoxes` from 1.8.14 to 1.8.15 and
+  `Azumatt-AzuExtendedPlayerInventory` from 2.4.1 to 2.4.2.
+- Updated `BetterUI_ForeverMaintained-BetterUI_ForeverMaintained` from 2.5.9
+  to 2.5.10.
+- Kept Jotunn, the Balrond modules, and the optional server-only WebMap overlay
+  on their already-current versions.
+
 ## 3.1.7 - Client join fix and server-only WebMap guide
 
 - Removed `Zevaryx-WebMap-2.7.1` from the shared Thunderstore dependency set,
